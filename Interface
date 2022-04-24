@@ -1,0 +1,84 @@
+package Unikut;
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner (System.in);
+        Scanner input = new Scanner (System.in);
+        char opCont, opPerf;
+        boolean validCont;
+        String email, senha;
+        Conta cont;
+        ListaUnikut listCont = new ListaUnikut();
+        Perfil perf = new Perfil();
+        AmigoUnikut contaAmg = new AmigoUnikut();
+        System.out.println("Bem-vindo a rede social Unikut.");
+        do {
+            System.out.println();
+            System.out.println("Deseja cadastrar uma conta? Se sim, digite 1.");
+            System.out.println("Se você já é cadastrado aqui, digite 2 para logar.");
+            System.out.println("Digite 0 para fechar a página da rede social.");
+            System.out.print("Digite aqui: ");
+            opCont = in.next().charAt(0);
+            while (opCont != '0' && opCont != '1' && opCont != '2' && opCont != '3') {
+                System.out.print("Opção inválida. Informe novamente: ");
+                opCont = in.next().charAt(0);
+            }
+            if (opCont == '0') {
+                System.out.println("Volte sempre aqui.");
+            }
+            else if (opCont == '3') {
+                listCont.exibCont();
+            }
+            else {
+                System.out.println("Digite as informações necessárias para a verificação de conta.");
+                System.out.print("Email: ");
+                email = input.nextLine();
+                System.out.print("Senha: ");
+                senha = input.nextLine();
+                cont = new Conta(email, senha);
+                if (opCont == '1') {
+                    listCont.incerirConta(cont);
+                }
+                else {
+                    validCont = perf.entrarPerf(listCont, cont);
+                    if (validCont == true) {
+                        menuUnikut();
+                        do {
+                            System.out.println();
+                            System.out.println("Digite 5 para ver o menu novamente.");
+                            System.out.print("Informe a sua opção desejada: ");
+                            opPerf = in.next().charAt(0);
+                            if (opPerf == '1') {
+                                perf.vizlPerf(listCont, cont);
+                            }
+                            else if (opPerf == '2') {
+                                perf.alterPerf(listCont, cont);
+                            }
+                            else if (opPerf == '3') {
+                                contaAmg.opAmigo(listCont, cont);
+                            }
+                            else if (opPerf == '5') {
+                                menuUnikut();
+                            }
+                            else if (opPerf == '0') {
+                                System.out.println("Esperamos te ver de novo por aqui.");
+                            }
+                            else {
+                                System.out.println("Opção inválida.");
+                            }
+                        } while (opPerf != '0');
+                    }
+                }
+            }
+        } while (opCont != '0');
+    }
+
+    public static void menuUnikut() {
+        System.out.println("Opções da rede social Unikut:");
+        System.out.println("1 - Vizualizar perfil.");
+        System.out.println("2 - Editar perfil.");
+        System.out.println("3 - Opções para adicionar usuários na lista de amigos.");
+        System.out.println("4 - Mandar mensagem para outra conta cadastrada.");
+        System.out.println("0 - Desconectar da sua conta.");
+    }
+}
