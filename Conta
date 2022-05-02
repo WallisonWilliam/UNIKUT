@@ -60,7 +60,8 @@ public class Conta {
         return compara;
     }
 
-    public String toString() {
-        return "Email: " + this.email + ", nome: " + this.nome + ", idade: " + this.idade + ", gênero: " + this.genero + ", data de aniversário: " + this.anivers + ", estado civil: " + this.estadCiv + " e descrição do perfil: " + this.descric + ".";
+     public String toString() {
+        return "Email: "  + this.email + "\n" + "Nome: " + this.nome + "\n" + "Idade: " + this.idade + "\n" + "Gênero: " + this.genero + "\n" +
+               "Data de aniversário: " + this.anivers + "\n" + "Estado civil: " + this.estadCiv + "\n" + "Descrição do perfil: " + this.descric;
     }
 }
