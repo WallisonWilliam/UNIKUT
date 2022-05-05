@@ -1,0 +1,141 @@
+package Unikut.Modelo;
+
+import Unikut.Controle.Conta;
+import Unikut.Controle.Node;
+
+public class ListaUnikut {
+    private Node primer;
+    private Node ultim;
+    private int qnt;
+    Node aux;
+
+    public boolean incerirConta(Conta cont, boolean nome) {
+        int compara;
+        Node listCont = new Node(cont);
+        Perfil perf = new Perfil();
+        if (this.isEmpty() == true) {
+            this.primer = listCont;
+            this.ultim = listCont;
+        }
+        else {
+            if (this.primer.getInfo().compareTo(cont) > 0) {
+                listCont.setProx(this.primer);
+                this.primer.setAnte(listCont);
+                this.primer = listCont;
+            }
+            else if (this.ultim.getInfo().compareTo(cont) < 0) {
+                listCont.setAnte(this.ultim);
+                this.ultim.setProx(listCont);
+                this.ultim = listCont;
+            }
+            else {
+                aux = this.primer;
+                while (aux != null) {
+                    compara = aux.getInfo().compareTo(cont);
+                    if (compara == 0) {
+                        return false;
+                    }
+                    else if (compara > 0) {
+                        aux.getAnte().setProx(listCont);
+                        listCont.setAnte(aux.getAnte());
+                        aux.setAnte(listCont);
+                        listCont.setProx(aux);
+                        break;
+                    }
+                    aux = aux.getProx();
+                }
+            }
+        }
+        this.qnt++;
+        if (nome == true) {
+            perf.editarNome(listCont);
+        }
+        return true;
+    }
+
+    public boolean incerirAmg(Conta contAmg) {
+        int compara;
+        Node listCont = new Node(contAmg);
+        Perfil perf = new Perfil();
+        if (this.primer.getInfo().compareTo(contAmg) > 0) {
+            listCont.setProx(this.primer);
+            this.primer.setAnte(listCont);
+            this.primer = listCont;
+        }
+        else if (this.ultim.getInfo().compareTo(contAmg) < 0) {
+            listCont.setAnte(this.ultim);
+            this.ultim.setProx(listCont);
+            this.ultim = listCont;
+        }
+        else {
+            aux = this.primer;
+            while (aux != null) {
+                compara = aux.getInfo().compareTo(contAmg);
+                if (compara == 0) {
+                    System.out.println("Solicitação enviada anteriormente");
+                    return false;
+                }
+                else if (compara > 0) {
+                    aux.getAnte().setProx(listCont);
+                    listCont.setAnte(aux.getAnte());
+                    aux.setAnte(listCont);
+                    listCont.setProx(aux);
+                    break;
+                }
+                aux = aux.getProx();
+            }
+        }
+        this.qnt++;
+        return true;
+    }
+
+    public void exibCont() {
+        int i;
+        if (this.isEmpty() == true) {
+            System.out.println("Nenhuma conta foi cadastrada na Unikut.");
+        }
+        else {
+            aux = this.primer;
+            for (i = 0; i <= this.qnt - 1; i++) {
+                System.out.println((i + 1) + "º Conta:");
+                System.out.println(aux.getInfo());
+                aux = aux.getProx();
+                if (i != this.qnt - 1) {
+                    System.out.println();
+                }
+            }
+        }
+    }
+    
+    public void vizlAmg() {
+        aux = this.primer;
+        while (aux != null) {
+            System.out.println("Usuário " + aux.getInfo().getEmail() + " status: " + aux.getStatusAmg() + ".");
+            aux = aux.getProx();
+        }
+    }
+
+
+    public boolean isEmpty() {
+        if (this.primer == null && this.ultim == null && this.qnt == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public Node buscaList(Conta bcCont) {
+        int compara;
+        aux = this.primer;
+        while (aux != null) {
+            compara = aux.getInfo().compareTo(bcCont);
+            if (compara == 0) {
+                return aux;
+            }
+            else if (compara > 0) {
+                return null;
+            }
+            aux = aux.getProx();
+        }
+        return null;
+    }
+}
