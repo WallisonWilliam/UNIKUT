@@ -1,4 +1,4 @@
-package Unikut;
+package Unikut.Controle;
 public class Conta {
     private String email;
     private String senha;
@@ -60,8 +60,9 @@ public class Conta {
         return compara;
     }
 
-     public String toString() {
-        return "Email: "  + this.email + "\n" + "Nome: " + this.nome + "\n" + "Idade: " + this.idade + "\n" + "Gênero: " + this.genero + "\n" +
-               "Data de aniversário: " + this.anivers + "\n" + "Estado civil: " + this.estadCiv + "\n" + "Descrição do perfil: " + this.descric;
+    public String toString() {
+        return "Email: "  + this.email + "\n" + "Nome: " + this.nome + "\n" + "Idade: " + this.idade + "\n"
+                + "Gênero: " + this.genero + "\n" + "Data de aniversário: " + this.anivers + "\n"
+                + "Estado civil: " + this.estadCiv + "\n" + "Descrição do perfil: " + this.descric;
     }
 }
