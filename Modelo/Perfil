@@ -1,0 +1,132 @@
+package Unikut.Modelo;
+
+import java.util.Scanner;
+import Unikut.Controle.Conta;
+import Unikut.Controle.Node;
+
+public class Perfil {
+    Scanner in = new Scanner (System.in);
+    Scanner input = new Scanner (System.in);
+    Node aux;
+
+    public void editarNome(Node listCont) {
+        char opNome;
+        String nome;
+        System.out.println("Deseja registrar o seu nome? Se sim, digite s. Se não, digite n.");
+        System.out.print("Digite aqui: ");
+        opNome = in.next().charAt(0);
+        opNome = Character.toUpperCase(opNome);
+        while (opNome != 'S' && opNome != 'N') {
+            System.out.print("Opção inválida. Informe novamente: ");
+            opNome = in.next().charAt(0);
+            opNome = Character.toUpperCase(opNome);
+        }
+        if (opNome == 'S') {
+            System.out.print("Informe aqui o seu nome: ");
+            nome = input.nextLine();
+            listCont.getInfo().setNome(nome);
+            System.out.println("Nome cadastrado no perfil.");
+        }
+        else {
+            listCont.getInfo().setNome("Convidado");
+            System.out.println("O seu nome no perfil aparecerá como convidado.");
+        }
+        System.out.print("Os seus outros dados no perfil aparecerão como sem informação. ");
+        System.out.println("Caso deseje registrar as suas informações, clique em editar perfil quando estiver logado na Unikut.");
+    }
+
+    public boolean entrarPerf(ListaUnikut listCont, Conta cont) {
+        aux = listCont.buscaList(cont);
+        if (listCont.isEmpty() == true) {
+            System.out.println("Nenhuma conta foi cadastrada na Unikut.");
+        }
+        else {
+            if (aux == null) {
+                System.out.println("Conta informada não está listada.");
+            }
+            else if (aux.getInfo().getSenha().compareTo(cont.getSenha()) != 0) {
+                System.out.println("Senha incorreta.");
+            }
+            else {
+                System.out.println("Seja bem-vindo.");
+                System.out.println();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void vizlPerf(ListaUnikut listCont, Conta cont) {
+        aux = listCont.buscaList(cont);
+        System.out.println(aux.getInfo());
+    }
+
+    public void alterPerf(ListaUnikut listCont, Conta cont) {
+        char opAlt;
+        String senha, nome, idade, genero, anivers, estadCiv, descric;
+        aux = listCont.buscaList(cont);
+        menuAlter();
+        do {
+            System.out.println();
+            System.out.println("Digite 8 para exibir o menu de alterações novamente.");
+            System.out.print("Digite aqui: ");
+            opAlt = in.next().charAt(0);
+            if (opAlt == '1') {
+                System.out.print("Informe a sua nova senha: ");
+                senha = input.nextLine();
+                aux.getInfo().setSenha(senha);
+            }
+            else if (opAlt == '2') {
+                System.out.print("Informe um novo nome: ");
+                nome = input.nextLine();
+                aux.getInfo().setNome(nome);
+            }
+            else if (opAlt == '3') {
+                System.out.print("Informe a sua idade: ");
+                idade = input.nextLine();
+                aux.getInfo().setIdade(idade);
+            }
+            else if (opAlt == '4') {
+                System.out.print("Informe o seu gênero: ");
+                genero = input.nextLine();
+                aux.getInfo().setGenero(genero);
+            }
+            else if (opAlt == '5') {
+                System.out.print("Informe a data do seu aniversário: ");
+                anivers = input.nextLine();
+                aux.getInfo().setAnivers(anivers);
+            }
+            else if (opAlt == '6') {
+                System.out.print("Informe o seu estado civil: ");
+                estadCiv = input.nextLine();
+                aux.getInfo().setEstadCiv(estadCiv);
+            }
+            else if (opAlt == '7') {
+                System.out.print("Informe uma descrição para o seu perfil: ");
+                descric = input.nextLine();
+                aux.getInfo().setDescric(descric);
+            }
+            else if (opAlt == '8') {
+                menuAlter();
+            }
+            else if (opAlt == '0') {
+                System.out.println("Voltando para o menu do perfil.");
+            }
+            else {
+                System.out.println("Opção inválida.");
+            }
+        } while (opAlt != '0');
+    }
+
+    private void menuAlter() {
+        System.out.println("Opções do menu de alteração:");
+        System.out.println("1 - Senha.");
+        System.out.println("2 - Nome.");
+        System.out.println("3 - Idade.");
+        System.out.println("4 - Gênero.");
+        System.out.println("5 - Aniversário.");
+        System.out.println("6 - Estado civil.");
+        System.out.println("7 - Descrição do seu perfil.");
+        System.out.println("0 - Voltar para o menu inicial.");
+    }
+}
