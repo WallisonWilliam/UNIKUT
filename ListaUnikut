@@ -1,4 +1,8 @@
-package Unikut;
+package Unikut.Modelo;
+
+import Unikut.Controle.Conta;
+import Unikut.Controle.Node;
+
 public class ListaUnikut {
     private Node primer;
     private Node ultim;
@@ -85,14 +89,19 @@ public class ListaUnikut {
     }
 
     public void exibCont() {
+        int i;
         if (this.isEmpty() == true) {
             System.out.println("Nenhuma conta foi cadastrada na Unikut.");
         }
         else {
             aux = this.primer;
-            while (aux != null) {
+            for (i = 0; i <= this.qnt - 1; i++) {
+                System.out.println((i + 1) + "º Conta:");
                 System.out.println(aux.getInfo());
                 aux = aux.getProx();
+                if (i != this.qnt - 1) {
+                    System.out.println();
+                }
             }
         }
     }
@@ -114,21 +123,16 @@ public class ListaUnikut {
 
     public Node buscaList(Conta bcCont) {
         int compara;
-        if (this.isEmpty() == true) {
-            System.out.println("Nenhuma conta foi cadastrada na Unikut.");
-        }
-        else {
-            aux = this.primer;
-            while (aux != null) {
-                compara = aux.getInfo().compareTo(bcCont);
-                if (compara == 0) {
-                    return aux;
-                }
-                else if (compara > 0) {
-                    return null;
-                }
-                aux = aux.getProx();
+        aux = this.primer;
+        while (aux != null) {
+            compara = aux.getInfo().compareTo(bcCont);
+            if (compara == 0) {
+                return aux;
             }
+            else if (compara > 0) {
+                return null;
+            }
+            aux = aux.getProx();
         }
         return null;
     }
