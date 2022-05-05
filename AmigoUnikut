@@ -1,8 +1,8 @@
 package Unikut.Modelo;
 
+import java.util.Scanner;
 import Unikut.Controle.Conta;
 import Unikut.Controle.Node;
-import java.util.Scanner;
 
 public class AmigoUnikut {
     Scanner in = new Scanner (System.in);
