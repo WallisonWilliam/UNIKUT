@@ -9,7 +9,7 @@ public class ListaUnikut {
     private int qnt;
     Node aux;
 
-    public void incerirConta(Conta cont) {
+    public boolean incerirConta(Conta cont, boolean nome) {
         int compara;
         Node listCont = new Node(cont);
         Perfil perf = new Perfil();
@@ -33,8 +33,7 @@ public class ListaUnikut {
                 while (aux != null) {
                     compara = aux.getInfo().compareTo(cont);
                     if (compara == 0) {
-                        System.out.println("Email cadastrado anteriormente. Tente outro email.");
-                        return;
+                        return false;
                     }
                     else if (compara > 0) {
                         aux.getAnte().setProx(listCont);
@@ -48,8 +47,10 @@ public class ListaUnikut {
             }
         }
         this.qnt++;
-        System.out.println("Conta cadastrada.");
-        perf.editarNome(listCont);
+        if (nome == true) {
+            perf.editarNome(listCont);
+        }
+        return true;
     }
 
     public boolean incerirAmg(Conta contAmg) {
@@ -105,6 +106,7 @@ public class ListaUnikut {
             }
         }
     }
+    
     public void vizlAmg() {
         aux = this.primer;
         while (aux != null) {
