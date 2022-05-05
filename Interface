@@ -1,8 +1,8 @@
 package Unikut.Visualização;
 
 import java.util.Scanner;
-import Unikut.Modelo.AmigoUnikut;
 import Unikut.Controle.Conta;
+import Unikut.Modelo.AmigoUnikut;
 import Unikut.Modelo.ListaUnikut;
 import Unikut.Modelo.Perfil;
 
@@ -33,7 +33,7 @@ public class Main {
                 senha = input.nextLine();
                 cont = new Conta(email, senha);
                 if (opCont == '1') {
-                    listCont.incerirConta(cont);
+                    menuCadastrar(cont, listCont);
                 }
                 else {
                     validCont = perf.entrarPerf(listCont, cont);
@@ -85,5 +85,16 @@ public class Main {
         System.out.println("3 - Opções para adicionar usuários na lista de amigos.");
         System.out.println("4 - Mandar mensagem para outra conta cadastrada.");
         System.out.println("0 - Desconectar da sua conta.");
+    }
+    
+    public static void menuCadastrar(Conta cont, ListaUnikut listCont) {
+        boolean valido, nome = true;
+        valido = listCont.incerirConta(cont, nome);
+        if (valido == true) {
+            System.out.println("Conta cadastrada.");
+        }
+        else {
+            System.out.println("Email cadastrado anteriormente. Tente outro email.");
+        }
     }
 }
