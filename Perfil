@@ -1,4 +1,8 @@
-package Unikut;
+package Unikut.Modelo;
+
+import Unikut.Controle.Conta;
+import Unikut.Controle.Node;
+
 import java.util.Scanner;
 public class Perfil {
     Scanner in = new Scanner (System.in);
@@ -12,7 +16,6 @@ public class Perfil {
         System.out.print("Digite aqui: ");
         opNome = in.next().charAt(0);
         opNome = Character.toUpperCase(opNome);
-        // Exceção 2
         while (opNome != 'S' && opNome != 'N') {
             System.out.print("Opção inválida. Informe novamente: ");
             opNome = in.next().charAt(0);
@@ -34,16 +37,21 @@ public class Perfil {
 
     public boolean entrarPerf(ListaUnikut listCont, Conta cont) {
         aux = listCont.buscaList(cont);
-        if (aux == null) {
-            System.out.println("Conta informada não está listada.");
-        }
-        else if (aux.getInfo().getSenha().compareTo(cont.getSenha()) != 0) {
-            System.out.println("Senha incorreta.");
+        if (listCont.isEmpty() == true) {
+            System.out.println("Nenhuma conta foi cadastrada na Unikut.");
         }
         else {
-            System.out.println("Seja bem-vindo.");
-            System.out.println();
-            return true;
+            if (aux == null) {
+                System.out.println("Conta informada não está listada.");
+            }
+            else if (aux.getInfo().getSenha().compareTo(cont.getSenha()) != 0) {
+                System.out.println("Senha incorreta.");
+            }
+            else {
+                System.out.println("Seja bem-vindo.");
+                System.out.println();
+                return true;
+            }
         }
         return false;
     }
@@ -63,7 +71,6 @@ public class Perfil {
             System.out.println("Digite 8 para exibir o menu de alterações novamente.");
             System.out.print("Digite aqui: ");
             opAlt = in.next().charAt(0);
-            // Exceção 3
             if (opAlt == '1') {
                 System.out.print("Informe a sua nova senha: ");
                 senha = input.nextLine();
