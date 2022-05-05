@@ -1,4 +1,4 @@
-package Unikut;
+package Unikut.Controle;
 public class Node {
     private Conta info;
     private Node ante;
