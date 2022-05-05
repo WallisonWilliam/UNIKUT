@@ -2,8 +2,8 @@ package Unikut.Modelo;
 
 import Unikut.Controle.Conta;
 import Unikut.Controle.Node;
-
 import java.util.Scanner;
+
 public class AmigoUnikut {
     Scanner in = new Scanner (System.in);
     Scanner input = new Scanner (System.in);
@@ -14,7 +14,7 @@ public class AmigoUnikut {
     public void opAmigo(ListaUnikut listCont, Conta cont) {
         char opAmg;
         String emailAmg;
-        boolean validAmg;
+        boolean validAmg, nome = false;
         MenuAmg();
         do {
             System.out.println();
@@ -22,7 +22,7 @@ public class AmigoUnikut {
             System.out.print("Digite aqui: ");
             opAmg = in.next().charAt(0);
             if (opAmg == '1') {
-                System.out.print("Informe o email do usuário: ");
+                System.out.print("Informe o email do usuário que deseja formar amizade: ");
                 emailAmg = input.nextLine();
                 contAmg = new Conta(emailAmg);
                 aux = listCont.buscaList(contAmg);
@@ -34,16 +34,13 @@ public class AmigoUnikut {
                         System.out.println("Não é possivel mandar uma solicitação para si mesmo.");
                     }
                     else {
-                        validAmg = listAmg.incerirAmg(contAmg);
+                        validAmg = listAmg.incerirConta(contAmg, nome);
                         if (validAmg == true) {
-                            aux2 = listAmg.buscaList(contAmg);
-                            if (aux2.getStatusAmg().equals("Amigos") == true) {
-                                System.out.println("O usuário já é seu amigo na Unikut.");
-                            }
-                            else {
-                                aux2.setStatusAmg("Pendente");
-                                System.out.println("Solicitação enviada. O status de amizade ficará como pendente.");
-                            }
+                            aux.setStatusAmg("Pendente");
+                            System.out.println("Solicitação enviada. O status de amizade ficará como pendente.");
+                        }
+                        else {
+                            System.out.println("O usuário é seu amigo ou já está na sua lista de solicitações.");
                         }
                     }
                 }
@@ -51,6 +48,7 @@ public class AmigoUnikut {
             else if (opAmg == '2') {
                 listAmg.vizlAmg();
             }
+            /*
             else if (opAmg == '3') {
                 System.out.print("Informe o email do usuário desejado: ");
                 emailAmg = input.nextLine();
@@ -64,6 +62,7 @@ public class AmigoUnikut {
                     System.out.println("O usuário já é seu amigo na Unikut.");
                 }
             }
+            */
             else if (opAmg == '4') {
                 MenuAmg();
             }
