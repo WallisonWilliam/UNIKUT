@@ -1,0 +1,68 @@
+package Unikut.Controle;
+public class Conta {
+    private String email;
+    private String senha;
+    private String nome;
+    private String idade = "Sem informação";
+    private String genero = "Sem informação";
+    private String anivers = "Sem informação";
+    private String estadCiv = "Sem informação";
+    private String descric = "Sem informação";
+
+    public Conta (String eml, String senh) {
+        this.email = eml;
+        this.senha = senh;
+    }
+
+    public Conta (String eml) {
+        this.email = eml;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getSenha() {
+        return this.senha;
+    }
+
+    public void setSenha(String senh) {
+        this.senha = senh;
+    }
+
+    public void setNome(String nom) {
+        this.nome = nom;
+    }
+
+    public void setIdade(String idade) {
+        this.idade = idade;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public void setAnivers(String anivers) {
+        this.anivers = anivers;
+    }
+
+    public void setEstadCiv(String estadCiv) {
+        this.estadCiv = estadCiv;
+    }
+
+    public void setDescric(String descric) {
+        this.descric = descric;
+    }
+
+    public int compareTo(Conta bcCont) {
+        int compara;
+        compara = this.email.compareTo(bcCont.getEmail());
+        return compara;
+    }
+
+    public String toString() {
+        return "Email: "  + this.email + "\n" + "Nome: " + this.nome + "\n" + "Idade: " + this.idade + "\n"
+                + "Gênero: " + this.genero + "\n" + "Data de aniversário: " + this.anivers + "\n"
+                + "Estado civil: " + this.estadCiv + "\n" + "Descrição do perfil: " + this.descric;
+    }
+}
