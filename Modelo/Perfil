@@ -9,26 +9,26 @@ public class Perfil {
     Scanner input = new Scanner (System.in);
     Node aux;
 
-    public void editarNome(Node listCont) {
+    public void editarNome(Node listCont, Conta cont) {
         char opNome;
         String nome;
         System.out.println("Deseja registrar o seu nome? Se sim, digite s. Se não, digite n.");
         System.out.print("Digite aqui: ");
         opNome = in.next().charAt(0);
-        opNome = Character.toUpperCase(opNome);
-        while (opNome != 'S' && opNome != 'N') {
+        opNome = Character.toLowerCase(opNome);
+        while (opNome != 's' && opNome != 'n') {
             System.out.print("Opção inválida. Informe novamente: ");
             opNome = in.next().charAt(0);
             opNome = Character.toUpperCase(opNome);
         }
-        if (opNome == 'S') {
+        if (opNome == 's') {
             System.out.print("Informe aqui o seu nome: ");
             nome = input.nextLine();
-            listCont.getInfo().setNome(nome);
+            cont.setNome(nome);
+            listCont.setInfo(cont);
             System.out.println("Nome cadastrado no perfil.");
         }
         else {
-            listCont.getInfo().setNome("Convidado");
             System.out.println("O seu nome no perfil aparecerá como convidado.");
         }
         System.out.print("Os seus outros dados no perfil aparecerão como sem informação. ");
@@ -63,48 +63,49 @@ public class Perfil {
 
     public void alterPerf(ListaUnikut listCont, Conta cont) {
         char opAlt;
-        String senha, nome, idade, genero, anivers, estadCiv, descric;
+        String altera, nome;
         aux = listCont.buscaList(cont);
         menuAlter();
         do {
             System.out.println();
+            System.out.println("Menu de alteracão.");
             System.out.println("Digite 8 para exibir o menu de alterações novamente.");
             System.out.print("Digite aqui: ");
             opAlt = in.next().charAt(0);
             if (opAlt == '1') {
                 System.out.print("Informe a sua nova senha: ");
-                senha = input.nextLine();
-                aux.getInfo().setSenha(senha);
-            }
-            else if (opAlt == '2') {
-                System.out.print("Informe um novo nome: ");
                 nome = input.nextLine();
                 aux.getInfo().setNome(nome);
             }
+            else if (opAlt == '2') {
+                System.out.print("Informe um novo nome: ");
+                altera = input.nextLine();
+                cont.setNome(altera);
+            }
             else if (opAlt == '3') {
                 System.out.print("Informe a sua idade: ");
-                idade = input.nextLine();
-                aux.getInfo().setIdade(idade);
+                altera = input.nextLine();
+                cont.setIdade(altera);
             }
             else if (opAlt == '4') {
                 System.out.print("Informe o seu gênero: ");
-                genero = input.nextLine();
-                aux.getInfo().setGenero(genero);
+                altera = input.nextLine();
+                cont.setGenero(altera);
             }
             else if (opAlt == '5') {
                 System.out.print("Informe a data do seu aniversário: ");
-                anivers = input.nextLine();
-                aux.getInfo().setAnivers(anivers);
+                altera = input.nextLine();
+                cont.setAnivers(altera);
             }
             else if (opAlt == '6') {
                 System.out.print("Informe o seu estado civil: ");
-                estadCiv = input.nextLine();
-                aux.getInfo().setEstadCiv(estadCiv);
+                altera = input.nextLine();
+                cont.setEstadCiv(altera);
             }
             else if (opAlt == '7') {
                 System.out.print("Informe uma descrição para o seu perfil: ");
-                descric = input.nextLine();
-                aux.getInfo().setDescric(descric);
+                altera = input.nextLine();
+                cont.setDescric(altera);
             }
             else if (opAlt == '8') {
                 menuAlter();
@@ -116,6 +117,7 @@ public class Perfil {
                 System.out.println("Opção inválida.");
             }
         } while (opAlt != '0');
+        aux.setInfo(cont);
     }
 
     private void menuAlter() {
