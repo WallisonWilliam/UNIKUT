@@ -6,7 +6,7 @@ import Unikut.Modelo.AmigoUnikut;
 import Unikut.Modelo.ListaUnikut;
 import Unikut.Modelo.Perfil;
 
-public class Main {
+public class Interface {
     public static void main(String[] args) {
         Scanner in = new Scanner (System.in);
         Scanner input = new Scanner (System.in);
@@ -26,7 +26,7 @@ public class Main {
             System.out.print("Digite aqui: ");
             opCont = in.next().charAt(0);
             if (opCont == '1' || opCont == '2') {
-                System.out.println("Digite as informações necessárias para a verificação de conta:");
+                System.out.println("Digite as informações necessárias para a verificação de conta (Você não poderá trocar o email depois!).");
                 System.out.print("Email: ");
                 email = input.nextLine();
                 System.out.print("Senha: ");
@@ -41,6 +41,7 @@ public class Main {
                         menuUnikut();
                         do {
                             System.out.println();
+                            System.out.println("Menu do perfil.");
                             System.out.println("Digite 5 para ver o menu novamente.");
                             System.out.print("Informe a sua opção desejada: ");
                             opPerf = in.next().charAt(0);
@@ -86,7 +87,7 @@ public class Main {
         System.out.println("4 - Mandar mensagem para outra conta cadastrada.");
         System.out.println("0 - Desconectar da sua conta.");
     }
-    
+
     public static void menuCadastrar(Conta cont, ListaUnikut listCont) {
         boolean valido, nome = true;
         valido = listCont.incerirConta(cont, nome);
