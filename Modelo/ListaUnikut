@@ -48,44 +48,8 @@ public class ListaUnikut {
         }
         this.qnt++;
         if (nome == true) {
-            perf.editarNome(listCont);
+            perf.editarNome(listCont, cont);
         }
-        return true;
-    }
-
-    public boolean incerirAmg(Conta contAmg) {
-        int compara;
-        Node listCont = new Node(contAmg);
-        Perfil perf = new Perfil();
-        if (this.primer.getInfo().compareTo(contAmg) > 0) {
-            listCont.setProx(this.primer);
-            this.primer.setAnte(listCont);
-            this.primer = listCont;
-        }
-        else if (this.ultim.getInfo().compareTo(contAmg) < 0) {
-            listCont.setAnte(this.ultim);
-            this.ultim.setProx(listCont);
-            this.ultim = listCont;
-        }
-        else {
-            aux = this.primer;
-            while (aux != null) {
-                compara = aux.getInfo().compareTo(contAmg);
-                if (compara == 0) {
-                    System.out.println("Solicitação enviada anteriormente");
-                    return false;
-                }
-                else if (compara > 0) {
-                    aux.getAnte().setProx(listCont);
-                    listCont.setAnte(aux.getAnte());
-                    aux.setAnte(listCont);
-                    listCont.setProx(aux);
-                    break;
-                }
-                aux = aux.getProx();
-            }
-        }
-        this.qnt++;
         return true;
     }
 
@@ -106,7 +70,7 @@ public class ListaUnikut {
             }
         }
     }
-    
+
     public void vizlAmg() {
         aux = this.primer;
         while (aux != null) {
