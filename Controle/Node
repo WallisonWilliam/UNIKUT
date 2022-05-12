@@ -3,7 +3,6 @@ public class Node {
     private Conta info;
     private Node ante;
     private Node prox;
-    private String statusAmg;
 
     public Node(Conta nvCont) {
         this.info = nvCont;
@@ -21,10 +20,6 @@ public class Node {
         return this.prox;
     }
 
-    public String getStatusAmg() {
-        return this.statusAmg;
-    }
-
     public void setInfo(Conta nvInfo) {
         this.info = nvInfo;
     }
@@ -35,9 +30,5 @@ public class Node {
 
     public void setProx(Node nvProx) {
         this.prox = nvProx;
-    }
-
-    public void setStatusAmg(String nvStatus) {
-        this.statusAmg = nvStatus;
     }
 }
