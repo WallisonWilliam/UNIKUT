@@ -19,18 +19,19 @@ public class Perfil {
         while (opNome != 's' && opNome != 'n') {
             System.out.print("Opção inválida. Informe novamente: ");
             opNome = in.next().charAt(0);
-            opNome = Character.toUpperCase(opNome);
+            opNome = Character.toLowerCase(opNome);
         }
         if (opNome == 's') {
             System.out.print("Informe aqui o seu nome: ");
             nome = input.nextLine();
             cont.setNome(nome);
-            listCont.setInfo(cont);
             System.out.println("Nome cadastrado no perfil.");
         }
         else {
+            cont.setNome("Convidado");
             System.out.println("O seu nome no perfil aparecerá como convidado.");
         }
+        listCont.setInfo(cont);
         System.out.print("Os seus outros dados no perfil aparecerão como sem informação. ");
         System.out.println("Caso deseje registrar as suas informações, clique em editar perfil quando estiver logado na Unikut.");
     }
@@ -63,7 +64,7 @@ public class Perfil {
 
     public void alterPerf(ListaUnikut listCont, Conta cont) {
         char opAlt;
-        String altera, nome;
+        String altera;
         aux = listCont.buscaList(cont);
         menuAlter();
         do {
@@ -74,8 +75,8 @@ public class Perfil {
             opAlt = in.next().charAt(0);
             if (opAlt == '1') {
                 System.out.print("Informe a sua nova senha: ");
-                nome = input.nextLine();
-                aux.getInfo().setNome(nome);
+                altera = input.nextLine();
+                cont.setSenha(altera);
             }
             else if (opAlt == '2') {
                 System.out.print("Informe um novo nome: ");
@@ -116,6 +117,7 @@ public class Perfil {
             else {
                 System.out.println("Opção inválida.");
             }
+            System.out.println(cont.getNome());
         } while (opAlt != '0');
         aux.setInfo(cont);
     }
