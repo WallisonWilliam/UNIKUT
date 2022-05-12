@@ -72,10 +72,15 @@ public class ListaUnikut {
     }
 
     public void vizlAmg() {
-        aux = this.primer;
-        while (aux != null) {
-            System.out.println("Usuário " + aux.getInfo().getEmail() + " status: " + aux.getStatusAmg() + ".");
-            aux = aux.getProx();
+        if (this.isEmpty() == true) {
+            System.out.println("Lista de amigos vazia.");
+        }
+        else {
+            aux = this.primer;
+            while (aux != null) {
+                System.out.println("Usuário " + aux.getInfo().getEmail() + ", status: " + aux.getInfo().getStatAmiz() + ".");
+                aux = aux.getProx();
+            }
         }
     }
 
