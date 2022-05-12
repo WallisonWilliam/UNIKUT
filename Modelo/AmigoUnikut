@@ -8,14 +8,15 @@ public class AmigoUnikut {
     Scanner in = new Scanner (System.in);
     Scanner input = new Scanner (System.in);
     Node aux;
-    ListaUnikut listAmg = new ListaUnikut();
-    Conta contAmg;
 
     public void opAmigo(ListaUnikut listCont, Conta cont) {
         char opAmg;
         String emailAmg;
+        Conta contAmg;
+        ListaUnikut listAmg = new ListaUnikut();
         MenuAmg();
         do {
+            System.out.println("Menu de amizade.");
             System.out.println();
             System.out.println("Digite 4 para ver o menu novamente.");
             System.out.print("Digite aqui: ");
@@ -32,10 +33,10 @@ public class AmigoUnikut {
                     System.out.println("Não é possível mandar ou aceitar solicitação de amizade para si mesmo.");
                 }
                 else if (opAmg == '1') {
-                    amigoLista();
+                    amigoLista(listAmg, contAmg);
                 }
                 else {
-                    aceitaAmizade(aux);
+                    aceitaAmizade(listAmg, contAmg);
                 }
             }
             else if (opAmg == '3') {
@@ -53,11 +54,13 @@ public class AmigoUnikut {
         } while (opAmg != '0');
     }
 
-    public void amigoLista() {
+    public void amigoLista(ListaUnikut listAmg, Conta contAmg) {
         boolean validAmg, nome = false;
         validAmg = listAmg.incerirConta(contAmg, nome);
+        aux = listAmg.buscaList(contAmg);
         if (validAmg == true) {
-            aux.setStatusAmg("Pendente");
+            contAmg.setStatAmiz("Pendente");
+            aux.setInfo(contAmg);
             System.out.println("Solicitação enviada. O status de amizade ficará como pendente.");
         }
         else {
@@ -66,9 +69,13 @@ public class AmigoUnikut {
     }
 
 
-    public void aceitaAmizade(Node aux) {
-        if (aux.getStatusAmg().compareTo("Pendente") == 0) {
-            aux.setStatusAmg("Amigos");
+    public void aceitaAmizade(ListaUnikut listAmg, Conta contAmg) {
+        String status;
+        status = contAmg.getStatAmiz();
+        if (status.equals("Pendente") == true) {
+            aux = listAmg.buscaList(contAmg);
+            contAmg.setStatAmiz("Amigo");
+            aux.setInfo(contAmg);
             System.out.println("Solicitação aceita.");
         }
         else {
@@ -78,8 +85,8 @@ public class AmigoUnikut {
 
     public void MenuAmg() {
         System.out.println("Opções do menu de amigos:");
-        System.out.println("1 - Enviar uma socilitação de amizade.");
-        System.out.println("2 - Aceitar socilitações de amizade.");
+        System.out.println("1 - Enviar uma solicitação de amizade.");
+        System.out.println("2 - Aceitar solicitações de amizade.");
         System.out.println("3 - Visualizar status de amizade.");
         System.out.println("0 - Voltar para o menu inicial.");
     }
