@@ -8,6 +8,7 @@ public class Conta {
     private String anivers = "Sem informação";
     private String estadCiv = "Sem informação";
     private String descric = "Sem informação";
+    private String statAmiz;
 
     public Conta (String eml, String senh) {
         this.email = eml;
@@ -24,6 +25,14 @@ public class Conta {
 
     public String getSenha() {
         return this.senha;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public String getStatAmiz() {
+        return this.statAmiz;
     }
 
     public void setSenha(String senh) {
@@ -52,6 +61,10 @@ public class Conta {
 
     public void setDescric(String descric) {
         this.descric = descric;
+    }
+
+    public void setStatAmiz(String statAmiz) {
+        this.statAmiz = statAmiz;
     }
 
     public int compareTo(Conta bcCont) {
