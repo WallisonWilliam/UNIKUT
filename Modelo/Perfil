@@ -12,7 +12,7 @@ public class Perfil {
     public void editarNome(Node listCont, Conta cont) {
         char opNome;
         String nome;
-        System.out.println("Deseja registrar o seu nome? Se sim, digite s. Se não, digite n.");
+        System.out.println("Deseja registrar ou alterar o seu nome? Se sim, digite s. Se não, digite n.");
         System.out.print("Digite aqui: ");
         opNome = in.next().charAt(0);
         opNome = Character.toLowerCase(opNome);
@@ -79,9 +79,7 @@ public class Perfil {
                 cont.setSenha(altera);
             }
             else if (opAlt == '2') {
-                System.out.print("Informe um novo nome: ");
-                altera = input.nextLine();
-                cont.setNome(altera);
+                editarNome(aux, cont);
             }
             else if (opAlt == '3') {
                 System.out.print("Informe a sua idade: ");
