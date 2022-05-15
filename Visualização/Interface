@@ -27,7 +27,7 @@ public class Interface {
             opCont = in.next().charAt(0);
             if (opCont == '1' || opCont == '2') {
                 System.out.print("Digite as informações necessárias para a verificação de conta ");
-                System.out.println("(Você não poderá trocar o email depois!).");
+                System.out.println("(Você não poderá trocar o email depois de ter logado!).");
                 System.out.print("Email: ");
                 email = input.nextLine();
                 System.out.print("Senha: ");
