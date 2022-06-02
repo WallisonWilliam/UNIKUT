@@ -1,98 +1,109 @@
-package Unikut.Modelo;
+package modelo;
 
 import java.util.Scanner;
-import Unikut.Controle.Conta;
-import Unikut.Controle.Node;
+
+import controle.Conta;
+import controle.Node;
+import static visualizacao.Cores.*;
 
 public class AmigoUnikut {
-    Scanner in = new Scanner (System.in);
-    Scanner input = new Scanner (System.in);
-    Node aux;
+	Scanner in = new Scanner(System.in);
+	Scanner input = new Scanner(System.in);
 
-    public void opAmigo(ListaUnikut listCont, Conta cont) {
-        char opAmg;
-        String emailAmg;
-        Conta contAmg;
-        ListaUnikut listAmg = new ListaUnikut();
-        if (cont.getNome().equals("Convidado") == true) {
-            System.out.print("É necessário que você adicione um nome para o seu perfil.");
-            System.out.println(" Assim, você poderá utilizar o menu de amizade.");
-            return;
-        }
-        MenuAmg();
-        do {
-            System.out.println("Menu de amizade.");
-            System.out.println();
-            System.out.println("Digite 4 para ver o menu novamente.");
-            System.out.print("Digite aqui: ");
-            opAmg = in.next().charAt(0);
-            if (opAmg == '1' || opAmg == '2') {
-                System.out.print("Informe o email do usuário desejado: ");
-                emailAmg = input.nextLine();
-                contAmg = new Conta(emailAmg);
-                aux = listCont.buscaList(contAmg);
-                if (aux == null) {
-                    System.out.println("O usuário não faz parte da Unikut.");
-                }
-                else if (aux.getInfo().compareTo(cont) == 0) {
-                    System.out.println("Não é possível mandar ou aceitar solicitação de amizade para si mesmo.");
-                }
-                else if (opAmg == '1') {
-                    amigoLista(listAmg, contAmg);
-                }
-                else {
-                    aceitaAmizade(listAmg, contAmg);
-                }
-            }
-            else if (opAmg == '3') {
-                listAmg.vizlAmg();
-            }
-            else if (opAmg == '4') {
-                MenuAmg();
-            }
-            else if (opAmg == '0') {
-                System.out.println("Voltando para o menu do perfil.");
-            }
-            else {
-                System.out.println("Opção inválida.");
-            }
-        } while (opAmg != '0');
-    }
+	public void opAmigo(ListaUnikut listUnikut, Conta cont) {
+		ListaUnikut listEnvio, listReceb;
+		Node auxList, aux;
+		Conta contaEnvio, contaReceb;
+		char opAmg;
+		String emailAmg;
+		auxList = listUnikut.buscaList(cont);
+		contaEnvio = auxList.getInfo();
+		if (contaEnvio.getNome().compareTo("Convidado") == 0) {
+			System.out.print(ANSI_RED + "A sua conta esta como ananimo.");
+			System.out.print(" e necessario que voce adicione um nome para o seu perfil,");
+			System.out.println(" para assim voce utilizar o menu de amizade.");
+			System.out.println("Voltando para o menu do perfil.");
+			return;
+		}
+		listEnvio = contaEnvio.getListaAmigo();
+		MenuAmg();
+		do {
+			System.out.println(ANSI_RESET);
+			System.out.println(ANSI_GREEN + "Menu de amizade." + ANSI_RESET);
+			System.out.println(ANSI_YELLOW + "Digite 4 para ver o menu novamente.");
+			System.out.print("Digite aqui: " + ANSI_RESET);
+			opAmg = in.next().charAt(0);
+			if (opAmg == '1' || opAmg == '2') {
+				System.out.print(ANSI_YELLOW + "Informe o email do usuario desejado: " + ANSI_RESET);
+				emailAmg = input.nextLine();
+				contaReceb = new Conta(emailAmg);
+				aux = listUnikut.buscaList(contaReceb);
+				if (aux == null) {
+					System.out.println(ANSI_RED + "Essa conta nao faz parte da Unikut.");
+				} else {
+					contaReceb = aux.getInfo();
+					listReceb = contaReceb.getListaAmigo();
+					if (contaReceb.compareTo(contaEnvio) == 0) {
+						System.out.println(
+								ANSI_RED + "Nao e possivel mandar ou aceitar solicitacao de amizade para si mesmo.");
+					} else if (contaReceb.getNome().compareTo("Convidado") == 0) {
+						System.out.println(ANSI_RED + "Essa conta esta cadastrada como anonimo.");
+					} else if (opAmg == '1') {
+						amigoLista(listEnvio, listReceb, contaEnvio, contaReceb);
+					} else {
+						aceitaAmizade(listEnvio, contaEnvio, contaReceb);
+					}
+				}
+			} else if (opAmg == '3') {
+				listEnvio.vizlAmg(contaEnvio);
+			} else if (opAmg == '4') {
+				MenuAmg();
+			} else if (opAmg == '0') {
+				System.out.println(ANSI_WHITE + "Voltando para o menu do perfil." + ANSI_RESET);
+			} else {
+				System.out.println(ANSI_RED + "Opcao invalida.");
+			}
+		} while (opAmg != '0');
+	}
 
-    public void amigoLista(ListaUnikut listAmg, Conta contAmg) {
-        boolean validAmg, nome = false;
-        validAmg = listAmg.incerirConta(contAmg, nome);
-        aux = listAmg.buscaList(contAmg);
-        if (validAmg == true) {
-            contAmg.setStatAmiz("Pendente");
-            aux.setInfo(contAmg);
-            System.out.println("Solicitação enviada. O status de amizade ficará como pendente.");
-        }
-        else {
-            System.out.println("O usuário é seu amigo ou já está na sua lista de solicitações.");
-        }
-    }
+	public void amigoLista(ListaUnikut listaEnvio, ListaUnikut listReceb, Conta contaEnvio, Conta contaReceb) {
+		boolean validSolic, validReceb, nome;
+		nome = false;
+		validSolic = listaEnvio.incerirConta(contaReceb, nome);
+		if (validSolic == true) {
+			validReceb = listReceb.incerirConta(contaEnvio, nome);
+			if (validReceb == true) {
+				contaEnvio.setStatAmiz("Solicitaçao enviada");
+				contaReceb.setStatAmiz("Pendente");
+				System.out.println(ANSI_WHITE
+						+ "Solicitacao enviada. O status de amizade ficara como pendente para esse usuario.");
+			}
+		} else {
+			System.out.println(ANSI_RED + "Essa conta ja esta na sua lista de solicitacoes ou de amizade.");
+		}
+	}
 
+	public void aceitaAmizade(ListaUnikut listaUsuar, Conta contaEnvio, Conta contaAmig) {
+		Node aux;
+		aux = listaUsuar.buscaList(contaAmig);
+		if (aux == null) {
+			System.out.println(ANSI_RED + "Essa conta nao faz parte da sua lista de amizade.");
+		} else if (contaAmig.getStatAmiz().compareTo("Amigos") == 0) {
+			System.out.println(ANSI_RED + "Essa conta ja e seu amigo na Unikut.");
+		} else if (contaEnvio.getStatAmiz().compareTo("Solicitaçao enviada") == 0) {
+			System.out.println(ANSI_RED + "Nao e possivel formar amizade com uma solicitacao enviadada por voce.");
+		} else if (contaEnvio.getStatAmiz().compareTo("Pendente") == 0) {
+			contaAmig.setStatAmiz("Amigos");
+			contaEnvio.setStatAmiz("Amigos");
+			System.out.println(ANSI_WHITE + "Solicitacao aceita.");
+		}
+	}
 
-    public void aceitaAmizade(ListaUnikut listAmg, Conta contAmg) {
-        String status;
-        status = contAmg.getStatAmiz();
-        if (status.equals("Pendente") == true) {
-            aux = listAmg.buscaList(contAmg);
-            contAmg.setStatAmiz("Amigo");
-            aux.setInfo(contAmg);
-            System.out.println("Solicitação aceita.");
-        }
-        else {
-            System.out.println("O usuário já é seu amigo na Unikut.");
-        }
-    }
-
-    public void MenuAmg() {
-        System.out.println("Opções do menu de amigos:");
-        System.out.println("1 - Enviar uma solicitação de amizade.");
-        System.out.println("2 - Aceitar solicitações de amizade.");
-        System.out.println("3 - Visualizar status de amizade.");
-        System.out.println("0 - Voltar para o menu inicial.");
-    }
+	public void MenuAmg() {
+		System.out.println(ANSI_GREEN + "Opcoes do menu de amigos:");
+		System.out.println("1 - Enviar uma solicitacao de amizade.");
+		System.out.println("2 - Aceitar solicitacoes de amizade.");
+		System.out.println("3 - Visualizar lista de amizade.");
+		System.out.println("0 - Voltar para o menu inicial.");
+	}
 }
