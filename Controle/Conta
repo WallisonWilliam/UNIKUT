@@ -1,81 +1,99 @@
-package Unikut.Controle;
+package controle;
+
+import modelo.ListaUnikut;
+import static visualizacao.Cores.*;
+
 public class Conta {
-    private String email;
-    private String senha;
-    private String nome;
-    private String idade = "Sem informação";
-    private String genero = "Sem informação";
-    private String anivers = "Sem informação";
-    private String estadCiv = "Sem informação";
-    private String descric = "Sem informação";
-    private String statAmiz;
+	private String email;
+	private String senha;
+	private String nome;
+	private String idade = "Sem informacao";
+	private String genero = "Sem informacao";
+	private String anivers = "Sem informacao";
+	private String estadCiv = "Sem informacao";
+	private String descric = "Sem informacao";
+	private String statAmiz;
+	public String recadAmiz = "Sem mensagens enviadas";
+	private final ListaUnikut listaAmigo = new ListaUnikut();
 
-    public Conta (String eml, String senh) {
-        this.email = eml;
-        this.senha = senh;
-    }
+	public Conta(String email, String senha) {
+		this.email = email;
+		this.senha = senha;
+	}
 
-    public Conta (String eml) {
-        this.email = eml;
-    }
+	public Conta(String email) {
+		this.email = email;
+	}
 
-    public String getEmail() {
-        return this.email;
-    }
+	public String getEmail() {
+		return this.email;
+	}
 
-    public String getSenha() {
-        return this.senha;
-    }
+	public String getSenha() {
+		return this.senha;
+	}
 
-    public String getNome() {
-        return this.nome;
-    }
+	public String getNome() {
+		return this.nome;
+	}
 
-    public String getStatAmiz() {
-        return this.statAmiz;
-    }
+	public String getStatAmiz() {
+		return this.statAmiz;
+	}
 
-    public void setSenha(String senh) {
-        this.senha = senh;
-    }
+	public String getRecadAmiz() {
+		return this.recadAmiz;
+	}
 
-    public void setNome(String nom) {
-        this.nome = nom;
-    }
+	public ListaUnikut getListaAmigo() {
+		return this.listaAmigo;
+	}
 
-    public void setIdade(String idade) {
-        this.idade = idade;
-    }
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setAnivers(String anivers) {
-        this.anivers = anivers;
-    }
+	public void setIdade(String idade) {
+		this.idade = idade;
+	}
 
-    public void setEstadCiv(String estadCiv) {
-        this.estadCiv = estadCiv;
-    }
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
 
-    public void setDescric(String descric) {
-        this.descric = descric;
-    }
+	public void setAnivers(String anivers) {
+		this.anivers = anivers;
+	}
 
-    public void setStatAmiz(String statAmiz) {
-        this.statAmiz = statAmiz;
-    }
+	public void setEstadCiv(String estadCiv) {
+		this.estadCiv = estadCiv;
+	}
 
-    public int compareTo(Conta bcCont) {
-        int compara;
-        compara = this.email.compareTo(bcCont.getEmail());
-        return compara;
-    }
+	public void setDescric(String descric) {
+		this.descric = descric;
+	}
 
-    public String toString() {
-        return "Email: "  + this.email + "\n" + "Nome: " + this.nome + "\n" + "Idade: " + this.idade + "\n"
-                + "Gênero: " + this.genero + "\n" + "Data de aniversário: " + this.anivers + "\n"
-                + "Estado civil: " + this.estadCiv + "\n" + "Descrição do perfil: " + this.descric;
-    }
+	public void setStatAmiz(String statAmiz) {
+		this.statAmiz = statAmiz;
+	}
+
+	public void setRecadAmiz(String recadAmiz) {
+		this.recadAmiz = recadAmiz;
+	}
+
+	public int compareTo(Conta bcCont) {
+		int compara;
+		compara = this.email.compareToIgnoreCase(bcCont.getEmail());
+		return compara;
+	}
+
+	public String toString() {
+		return ANSI_GREEN + "Email: " + this.email + "\n" + "Nome: " + this.nome + "\n" + "Idade: " + this.idade + "\n"
+				+ "Genero: " + this.genero + "\n" + "Data de aniversario: " + this.anivers + "\n" + "Estado civil: "
+				+ this.estadCiv + "\n" + "Descricao do perfil: " + this.descric + ANSI_RESET;
+	}
 }
