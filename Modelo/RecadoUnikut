@@ -1,72 +1,77 @@
-package Unikut.Modelo;
+package modelo;
 
 import java.util.Scanner;
-import Unikut.Controle.Conta;
-import Unikut.Controle.Node;
+import static visualizacao.Cores.*;
+
+import controle.Conta;
+import controle.Node;
 
 public class RecadoUnikut {
-    Scanner in = new Scanner (System.in);
-    Scanner input = new Scanner (System.in);
+	Scanner in = new Scanner(System.in);
+	Scanner input = new Scanner(System.in);
 
-    public void opRecados(ListaUnikut listAmg, Conta cont) {
-        char opRec;
-        String emailRec, recado;
-        Conta contRec;
-        Node aux;
-        if (listAmg.isEmpty() == true) {
-            System.out.println("Você não tem nenhum amigo adicionado.");
-            return;
-        }
-        menuRec();
-        do {
-            System.out.println();
-            System.out.println("Menu de recados.");
-            System.out.println("Digite 3 para exibir as opções de recados novamente.");
-            System.out.println("Informe a sua opção desejada: ");
-            opRec = in.next().charAt(0);
-            if (opRec == '1') {
-                mandarRecado(listAmg, cont);
-            }
-            else if (opRec == '2') {
-                listAmg.vizRec();
-            }
-            else if (opRec == '3') {
-                menuRec();
-            }
-            else if (opRec == '0') {
-                System.out.println("Voltando para o menu do perfil.");
-            }
-            else {
-                System.out.println("Opção inválida.");
-            }
-        } while (opRec != '0');
-    }
+	public void opRecados(ListaUnikut listUnikut, Conta cont) {
+		ListaUnikut listaAmizad;
+		Node auxList;
+		Conta contUsuar;
+		char opRec;
+		auxList = listUnikut.buscaList(cont);
+		contUsuar = auxList.getInfo();
+		listaAmizad = contUsuar.getListaAmigo();
+		if (listaAmizad.isEmpty() == true) {
+			System.out.println(ANSI_RED + "Voce nao tem nenhum amigo adicionado no seu perfil." + ANSI_RESET);
+			System.out.println(ANSI_WHITE + "Voltando para o menu do perfil.");
+			return;
+		}
+		menuRec();
+		do {
+			System.out.println(ANSI_RESET);
+			System.out.println(ANSI_GREEN + "Menu de recados." + ANSI_RESET);
+			System.out.println(ANSI_YELLOW + "Digite 3 para exibir as opcoes de recados novamente.");
+			System.out.print("Informe a sua opcao desejada: " + ANSI_RESET);
+			opRec = in.next().charAt(0);
+			if (opRec == '1') {
+				mandarRecado(listaAmizad, contUsuar);
+			} else if (opRec == '2') {
+				listaAmizad.vizRec();
+			} else if (opRec == '3') {
+				menuRec();
+			} else if (opRec == '0') {
+				System.out.println(ANSI_WHITE + "Voltando para o menu do perfil.");
+			} else {
+				System.out.println(ANSI_RED + "Opcao invalida.");
+			}
+		} while (opRec != '0');
+	}
 
-    public void mandarRecado(ListaUnikut listAmg, Conta cont) {
-        String emailRec, recado;
-        Conta contRec;
-        Node aux;
-        System.out.println("Informe o email do amigo que deseja mandar uma mensagem: ");
-        emailRec = input.nextLine();
-        contRec = new Conta(emailRec);
-        aux = listAmg.buscaList(contRec);
-        if (aux == null) {
-            System.out.println("O email informado não está na sua lista de amigos.");
-        }
-        else if (contRec.compareTo(cont) == 0) {
-            System.out.println("Não é possível mandar mensagem para si mesmo.");
-        }
-        else {
-            System.out.println("Informe o recado que deseja mandar para seu amigo: ");
-            recado = input.nextLine();
-            contRec.setRecadAmiz(recado);
-        }
-    }
+	public void mandarRecado(ListaUnikut listaAmizad, Conta contaEnvio) {
+		Node aux;
+		Conta valida, contaAmigo;
+		String emailRec, recado;
+		System.out.print(ANSI_WHITE + "Informe o email do amigo que deseja mandar uma mensagem: " + ANSI_RESET);
+		emailRec = input.nextLine();
+		valida = new Conta(emailRec);
+		aux = listaAmizad.buscaList(valida);
+		if (aux == null) {
+			System.out.println(ANSI_RED + "A conta informada nao esta na sua lista de amigos.");
+		} else {
+			contaAmigo = aux.getInfo();
+			if (contaAmigo.getStatAmiz().compareTo("Amigos") != 0) {
+				System.out.println(ANSI_RED + "A conta informada nao aceitou o seu convite de amizade");
+			} else {
+				System.out.print(ANSI_WHITE + "Informe o recado que deseja mandar para seu amigo: " + ANSI_RESET);
+				recado = input.nextLine();
+				contaEnvio.setRecadAmiz(recado);
+				contaAmigo.setRecadAmiz(recado);
+				System.out.println(ANSI_YELLOW + "Mensagem enviada.");
+			}
+		}
+	}
 
-    public void menuRec() {
-        System.out.println("Opções do menu de recados:");
-        System.out.println("1 - Mandar recados para algum amigo.");
-        System.out.println("2 - Exibir todos os recados.");
-        System.out.println("0 - sair do menu de recados.");
-    }
+	public void menuRec() {
+		System.out.println(ANSI_GREEN + "Opcoes do menu de recados:");
+		System.out.println("1 - Mandar recados para algum amigo.");
+		System.out.println("2 - Exibir todos os recados.");
+		System.out.println("0 - sair do menu de recados.");
+	}
 }
