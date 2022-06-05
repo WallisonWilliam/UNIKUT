@@ -74,17 +74,12 @@ public class Interface {
 							System.out.println(ANSI_RED + "Opcao invalida.");
 						}
 					} while (opPerf != '0');
-
-				} else if (opCont == '3') {
-					listCont.exibCont();
-				} else if (opCont == '0') {
-					System.out.println(ANSI_WHITE + "Volte sempre aqui." + ANSI_RESET);
-				} else {
-					System.out.println(ANSI_RED + "Opcao invalida." + ANSI_RESET);
 				}
+			case '0':
+				System.out.println(ANSI_WHITE + "Encerrando o programa, volte sempre!." + ANSI_RESET);
 				break;
 			default:
-				System.out.println(ANSI_RED + "Opção invalida" + ANSI_RESET);
+				System.out.println(ANSI_RED + "Opçao invalida" + ANSI_RESET);
 			}
 		} while (opCont != '0');
 	}
