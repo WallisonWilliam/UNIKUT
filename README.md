@@ -21,10 +21,6 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 O UNIKUT é uma rede social 100% em java, onde você pode fazer novas amizades e relacionar-se com novas pessoas.
 
-## 📚 Javadoc
-
-Você pode acessar a javadoc online do projeto através [desse link](https://unikut-javadoc.vercel.app/).
-
 ## 🚀 Como executar
 
 - Clone o repositório
@@ -33,18 +29,17 @@ Você pode acessar a javadoc online do projeto através [desse link](https://uni
 
 ## 👨‍👦‍👦 COLABORADORES
 
-#### Nome: Djalma Henrique Silva Lima
-- Matrícula: 202013531-2
-- GitHub: [DjalmaHenry](https://github.com/DjalmaHenry)
+Nome: Arthur Franco Lopes da Cruz
+•	GitHub: ArthurF36
+#### Nome: Arthur Franco Lopes da Cruz
+•	GitHub: [ArthurF36](https://github.com/ArthurF36)
 
-#### Nome: Lucas dos Santos Amorim Rego
-- Matricula: 202010968-0
-- GitHub: [lucass235](https://github.com/lucass235)
+Nome: Luiz Fernando Soares Accioly
+•	GitHub: Nandincci
+#### Nome: Luiz Fernando Soares Accioly
+•	GitHub: [Nandincci](https://github.com/Nandincci)
 
-#### Nome: Alyson José de Farias Ramos
-- Matricula: 202013039-9
-- GitHub: [AlysonFarias](https://github.com/alysonfarias)
-
-#### Nome: Marcos Rigel Silvestre da Silva
-- Matricula: 202010974-2
-- GitHub: [MarcosRigel](https://github.com/MarcosRigel)
+Nome: Wallison William de Oliveira Melo
+•	GitHub: WallisonWilliam
+#### Nome: Wallison William de Oliveira Melo
+•	GitHub: [WallisonWilliam](https://github.com/WallisonWilliam)
