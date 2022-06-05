@@ -75,6 +75,7 @@ public class Interface {
 						}
 					} while (opPerf != '0');
 				}
+				break;
 			case '0':
 				System.out.println(ANSI_WHITE + "Encerrando o programa, volte sempre!." + ANSI_RESET);
 				break;
@@ -82,5 +83,8 @@ public class Interface {
 				System.out.println(ANSI_RED + "Opçao invalida" + ANSI_RESET);
 			}
 		} while (opCont != '0');
+		in.close();
+		input.close();
 	}
+
 }
