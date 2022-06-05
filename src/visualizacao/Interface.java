@@ -34,9 +34,9 @@ public class Interface {
 			case '1':
 				System.out.print(ANSI_YELLOW + "Digite as informaçoes necessarias para a verificacao de conta ");
 				System.out.println("(Voce nao podera trocar o email depois de ter logado!).");
-				System.out.print("Email: ");
+				System.out.print("Email: " + ANSI_RESET);
 				email = input.nextLine();
-				System.out.print("Senha: " + ANSI_RESET);
+				System.out.print(ANSI_YELLOW + "Senha: " + ANSI_RESET);
 				senha = input.nextLine();
 				cont = new Conta(email, senha);
 				menuCadastrar(cont, listCont);
@@ -46,7 +46,7 @@ public class Interface {
 				System.out.println("(Voce nao podera trocar o email depois de ter logado!).");
 				System.out.print("Email: " + ANSI_RESET);
 				email = input.nextLine();
-				System.out.print("Senha: " + ANSI_RESET);
+				System.out.print(ANSI_YELLOW + "Senha: " + ANSI_RESET);
 				senha = input.nextLine();
 				cont = new Conta(email, senha);
 				validCont = perf.entrarPerf(listCont, cont);
