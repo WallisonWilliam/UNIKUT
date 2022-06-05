@@ -37,6 +37,7 @@ public class Perfil {
 			System.out.println(ANSI_WHITE + "Nome cadastrado no perfil." + ANSI_RESET);
 		} else {
 			editaNome.setNome("Convidado");
+			System.out.println();
 			System.out.println(ANSI_WHITE + "O seu nome no perfil aparecera como convidado." + ANSI_RESET);
 		}
 	}
@@ -179,3 +180,4 @@ public class Perfil {
 		System.out.println(ANSI_WHITE + "Alteracao realizada.");
 	}
 }
+
