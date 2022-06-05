@@ -18,7 +18,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-O UNIKUT é uma rede social 100% em java, onde você pode fazer novas amizades e relacionar-se com novas pessoas.
+O UNIKUT é uma rede social feita em java, inspirado no antigo Orkut, onde você pode fazer novas amizades e relacionar-se com novas pessoas.
 
 ## 🚀 Como executar
 
